@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Szenario {{ scenario_num }} - SP Umfrage{% endblock %}
+
+{% block content %}
+<div class="survey-section">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ 50 + (scenario_num / 12 * 25) }}%;"></div>
+    </div>
+    <p class="progress-text">Teil 3 von 4: Wahlszenarien (Szenario {{ scenario_num }} von {{ total_scenarios }})</p>
+    
+    <form method="POST" id="choiceForm" class="survey-form">
+        <h2>Szenario {{ scenario_num }}</h2>
+        <p class="section-description">
+            Stellen Sie sich vor, Sie müssen eine Fahrt unternehmen. 
+            Welche der folgenden Optionen würden Sie wählen?
+        </p>
+        
+        <div class="choice-container">
+            {% for alt_id, alt_data in scenario.alternatives.items() %}
+            <div class="choice-card" onclick="selectChoice('{{ alt_id }}')">
+                <input type="radio" name="choice" value="{{ alt_id }}" id="choice_{{ alt_id }}" required>
+                <label for="choice_{{ alt_id }}">
+                    <div class="choice-header">
+                        <span class="choice-label">Option {{ alt_id }}</span>
+                        <span class="mode-icon">
+                            {% if alt_data.mode == 'Auto (privat)' %}🚗
+                            {% elif alt_data.mode == 'ÖPNV' %}🚌
+                            {% elif alt_data.mode == 'Fahrrad / E-Bike' %}🚲
+                            {% elif alt_data.mode == 'Autonomes Ridesharing' %}🤖
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="choice-attribute">
+                        <span class="attr-label">Verkehrsmittel:</span>
+                        <span class="attr-value">{{ alt_data.mode }}</span>
+                    </div>
+                    
+                    <div class="choice-attribute">
+                        <span class="attr-label">⏱️ Reisezeit:</span>
+                        <span class="attr-value">{{ alt_data.time }} min</span>
+                    </div>
+                    
+                    <div class="choice-attribute">
+                        <span class="attr-label">💰 Kosten:</span>
+                        <span class="attr-value">{{ alt_data.cost }} €</span>
+                    </div>
+                    
+                    <div class="choice-attribute">
+                        <span class="attr-label">✓ Zuverlässigkeit:</span>
+                        <span class="attr-value">{{ alt_data.reliability }}%</span>
+                    </div>
+                    
+                    <div class="choice-attribute">
+                        <span class="attr-label">🌱 CO₂-Ausstoß:</span>
+                        <span class="attr-value co2-{{ alt_data.co2|replace(' ', '-') }}">{{ alt_data.co2 }}</span>
+                    </div>
+                </label>
+            </div>
+            {% endfor %}
+            
+            <div class="choice-card choice-none" onclick="selectChoice('none')">
+                <input type="radio" name="choice" value="none" id="choice_none" required>
+                <label for="choice_none">
+                    <div class="choice-header">
+                        <span class="choice-label">Keine davon</span>
+                        <span class="mode-icon">🚫</span>
+                    </div>
+                    <p class="none-description">
+                        Ich würde keine dieser Optionen wählen und die Fahrt nicht antreten.
+                    </p>
+                </label>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            {% if scenario_num > 1 %}
+            <a href="{{ url_for('choice', scenario_num=scenario_num-1) }}" class="btn btn-secondary">← Zurück</a>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">
+                {% if scenario_num < total_scenarios %}
+                Weiter →
+                {% else %}
+                Weiter zu Teil 4 →
+                {% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+function selectChoice(choiceId) {
+    document.getElementById('choice_' + choiceId).checked = true;
+    // Visuelle Hervorhebung
+    document.querySelectorAll('.choice-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    document.getElementById('choice_' + choiceId).parentElement.classList.add('selected');
+}
+</script>
+{% endblock %}

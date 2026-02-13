@@ -1,0 +1,314 @@
+[
+  {
+    "scenario_id": 1,
+    "alternatives": {
+      "A": {
+        "mode": "Auto (privat)",
+        "time": 35,
+        "cost": 6,
+        "reliability": 95,
+        "co2": "keine Emissionen"
+      },
+      "B": {
+        "mode": "ÖPNV",
+        "time": 10,
+        "cost": 3,
+        "reliability": 70,
+        "co2": "mittel"
+      },
+      "C": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 50,
+        "cost": 1,
+        "reliability": 85,
+        "co2": "niedrig"
+      }
+    }
+  },
+  {
+    "scenario_id": 2,
+    "alternatives": {
+      "A": {
+        "mode": "Autonomes Ridesharing",
+        "time": 20,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "hoch"
+      },
+      "B": {
+        "mode": "Autonomes Ridesharing",
+        "time": 10,
+        "cost": 6,
+        "reliability": 99,
+        "co2": "niedrig"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 20,
+        "cost": 3,
+        "reliability": 95,
+        "co2": "mittel"
+      }
+    }
+  },
+  {
+    "scenario_id": 3,
+    "alternatives": {
+      "A": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 35,
+        "cost": 1,
+        "reliability": 70,
+        "co2": "hoch"
+      },
+      "B": {
+        "mode": "ÖPNV",
+        "time": 50,
+        "cost": 10,
+        "reliability": 85,
+        "co2": "keine Emissionen"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 10,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "keine Emissionen"
+      }
+    }
+  },
+  {
+    "scenario_id": 4,
+    "alternatives": {
+      "A": {
+        "mode": "ÖPNV",
+        "time": 50,
+        "cost": 6,
+        "reliability": 95,
+        "co2": "hoch"
+      },
+      "B": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 20,
+        "cost": 1,
+        "reliability": 85,
+        "co2": "niedrig"
+      },
+      "C": {
+        "mode": "Autonomes Ridesharing",
+        "time": 35,
+        "cost": 3,
+        "reliability": 70,
+        "co2": "mittel"
+      }
+    }
+  },
+  {
+    "scenario_id": 5,
+    "alternatives": {
+      "A": {
+        "mode": "Autonomes Ridesharing",
+        "time": 10,
+        "cost": 6,
+        "reliability": 95,
+        "co2": "keine Emissionen"
+      },
+      "B": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 35,
+        "cost": 3,
+        "reliability": 99,
+        "co2": "mittel"
+      },
+      "C": {
+        "mode": "ÖPNV",
+        "time": 20,
+        "cost": 10,
+        "reliability": 85,
+        "co2": "niedrig"
+      }
+    }
+  },
+  {
+    "scenario_id": 6,
+    "alternatives": {
+      "A": {
+        "mode": "Auto (privat)",
+        "time": 50,
+        "cost": 1,
+        "reliability": 70,
+        "co2": "hoch"
+      },
+      "B": {
+        "mode": "Autonomes Ridesharing",
+        "time": 35,
+        "cost": 3,
+        "reliability": 70,
+        "co2": "keine Emissionen"
+      },
+      "C": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 50,
+        "cost": 1,
+        "reliability": 95,
+        "co2": "hoch"
+      }
+    }
+  },
+  {
+    "scenario_id": 7,
+    "alternatives": {
+      "A": {
+        "mode": "Auto (privat)",
+        "time": 20,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "mittel"
+      },
+      "B": {
+        "mode": "ÖPNV",
+        "time": 10,
+        "cost": 6,
+        "reliability": 85,
+        "co2": "niedrig"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 50,
+        "cost": 3,
+        "reliability": 99,
+        "co2": "hoch"
+      }
+    }
+  },
+  {
+    "scenario_id": 8,
+    "alternatives": {
+      "A": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 10,
+        "cost": 6,
+        "reliability": 95,
+        "co2": "keine Emissionen"
+      },
+      "B": {
+        "mode": "Autonomes Ridesharing",
+        "time": 20,
+        "cost": 1,
+        "reliability": 70,
+        "co2": "niedrig"
+      },
+      "C": {
+        "mode": "ÖPNV",
+        "time": 35,
+        "cost": 10,
+        "reliability": 85,
+        "co2": "mittel"
+      }
+    }
+  },
+  {
+    "scenario_id": 9,
+    "alternatives": {
+      "A": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 35,
+        "cost": 6,
+        "reliability": 85,
+        "co2": "mittel"
+      },
+      "B": {
+        "mode": "ÖPNV",
+        "time": 20,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "keine Emissionen"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 50,
+        "cost": 1,
+        "reliability": 95,
+        "co2": "niedrig"
+      }
+    }
+  },
+  {
+    "scenario_id": 10,
+    "alternatives": {
+      "A": {
+        "mode": "Autonomes Ridesharing",
+        "time": 10,
+        "cost": 3,
+        "reliability": 70,
+        "co2": "hoch"
+      },
+      "B": {
+        "mode": "Autonomes Ridesharing",
+        "time": 35,
+        "cost": 1,
+        "reliability": 70,
+        "co2": "keine Emissionen"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 10,
+        "cost": 6,
+        "reliability": 85,
+        "co2": "hoch"
+      }
+    }
+  },
+  {
+    "scenario_id": 11,
+    "alternatives": {
+      "A": {
+        "mode": "ÖPNV",
+        "time": 20,
+        "cost": 3,
+        "reliability": 95,
+        "co2": "mittel"
+      },
+      "B": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 50,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "niedrig"
+      },
+      "C": {
+        "mode": "Autonomes Ridesharing",
+        "time": 10,
+        "cost": 6,
+        "reliability": 70,
+        "co2": "hoch"
+      }
+    }
+  },
+  {
+    "scenario_id": 12,
+    "alternatives": {
+      "A": {
+        "mode": "Fahrrad / E-Bike",
+        "time": 50,
+        "cost": 3,
+        "reliability": 95,
+        "co2": "niedrig"
+      },
+      "B": {
+        "mode": "ÖPNV",
+        "time": 35,
+        "cost": 1,
+        "reliability": 85,
+        "co2": "keine Emissionen"
+      },
+      "C": {
+        "mode": "Auto (privat)",
+        "time": 20,
+        "cost": 10,
+        "reliability": 99,
+        "co2": "mittel"
+      }
+    }
+  }
+]
