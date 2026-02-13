@@ -63,6 +63,17 @@ python app.py
 
 Für Lehrzwecke generiert die Anwendung automatisch einen zufälligen Key.
 
+### Optional: Debug-Modus aktivieren
+
+Für Entwicklungszwecke kann der Debug-Modus aktiviert werden:
+
+```bash
+export FLASK_DEBUG=True
+python app.py
+```
+
+**Wichtig:** Debug-Modus sollte in Produktion **nicht** aktiviert sein!
+
 ## 📁 Projektstruktur
 
 ```
