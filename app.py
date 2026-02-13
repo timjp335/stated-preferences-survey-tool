@@ -11,7 +11,8 @@ from datetime import datetime
 import uuid
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-change-in-production'  # Für Lehrzwecke
+# Verwende Umgebungsvariable oder generiere einen zufälligen Key für Lehrzwecke
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', os.urandom(24).hex())
 
 # Lade Choice Sets beim Start
 CHOICE_SETS_PATH = os.path.join(os.path.dirname(__file__), 'design', 'choice_sets.json')

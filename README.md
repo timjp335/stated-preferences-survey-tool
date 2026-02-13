@@ -52,6 +52,17 @@ http://127.0.0.1:5000
 
 Die Umfrage ist jetzt verfügbar! 🎉
 
+### Optional: Flask Secret Key setzen
+
+Für Produktivumgebungen sollte ein eigener Secret Key gesetzt werden:
+
+```bash
+export FLASK_SECRET_KEY="ihr-geheimer-schluessel-hier"
+python app.py
+```
+
+Für Lehrzwecke generiert die Anwendung automatisch einen zufälligen Key.
+
 ## 📁 Projektstruktur
 
 ```
