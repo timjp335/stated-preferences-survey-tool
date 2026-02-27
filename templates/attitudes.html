@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Einstellungen - SP Umfrage{% endblock %}
+
+{% block content %}
+<div class="survey-section">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 90%;"></div>
+    </div>
+    <p class="progress-text">Teil 4 von 4: Einstellungen zum Verkehr</p>
+    
+    <form method="POST" id="attitudesForm" class="survey-form">
+        <h2>Ihre Einstellungen</h2>
+        <p class="section-description">
+            Zum Abschluss möchten wir noch Ihre Meinung zu verschiedenen Aspekten der Mobilität erfahren.
+        </p>
+        
+        <div class="form-group likert-group">
+            <label>Umweltaspekte sind mir bei der Verkehrsmittelwahl sehr wichtig. *</label>
+            <div class="likert-scale">
+                <div class="likert-option">
+                    <input type="radio" name="env_awareness" value="1" id="env_1" required>
+                    <label for="env_1">
+                        <span class="likert-label">Stimme gar nicht zu</span>
+                        <span class="likert-number">1</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="env_awareness" value="2" id="env_2">
+                    <label for="env_2">
+                        <span class="likert-number">2</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="env_awareness" value="3" id="env_3">
+                    <label for="env_3">
+                        <span class="likert-label">Neutral</span>
+                        <span class="likert-number">3</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="env_awareness" value="4" id="env_4">
+                    <label for="env_4">
+                        <span class="likert-number">4</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="env_awareness" value="5" id="env_5">
+                    <label for="env_5">
+                        <span class="likert-label">Stimme voll zu</span>
+                        <span class="likert-number">5</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group likert-group">
+            <label>Ich bin offen für neue Technologien im Verkehr. *</label>
+            <div class="likert-scale">
+                <div class="likert-option">
+                    <input type="radio" name="tech_affinity" value="1" id="tech_1" required>
+                    <label for="tech_1">
+                        <span class="likert-label">Stimme gar nicht zu</span>
+                        <span class="likert-number">1</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="tech_affinity" value="2" id="tech_2">
+                    <label for="tech_2">
+                        <span class="likert-number">2</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="tech_affinity" value="3" id="tech_3">
+                    <label for="tech_3">
+                        <span class="likert-label">Neutral</span>
+                        <span class="likert-number">3</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="tech_affinity" value="4" id="tech_4">
+                    <label for="tech_4">
+                        <span class="likert-number">4</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="tech_affinity" value="5" id="tech_5">
+                    <label for="tech_5">
+                        <span class="likert-label">Stimme voll zu</span>
+                        <span class="likert-number">5</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group likert-group">
+            <label>Ich würde ein autonomes Fahrzeug nutzen. *</label>
+            <div class="likert-scale">
+                <div class="likert-option">
+                    <input type="radio" name="autonomous_openness" value="1" id="auto_1" required>
+                    <label for="auto_1">
+                        <span class="likert-label">Stimme gar nicht zu</span>
+                        <span class="likert-number">1</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="autonomous_openness" value="2" id="auto_2">
+                    <label for="auto_2">
+                        <span class="likert-number">2</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="autonomous_openness" value="3" id="auto_3">
+                    <label for="auto_3">
+                        <span class="likert-label">Neutral</span>
+                        <span class="likert-number">3</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="autonomous_openness" value="4" id="auto_4">
+                    <label for="auto_4">
+                        <span class="likert-number">4</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="autonomous_openness" value="5" id="auto_5">
+                    <label for="auto_5">
+                        <span class="likert-label">Stimme voll zu</span>
+                        <span class="likert-number">5</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group likert-group">
+            <label>Der Preis ist der wichtigste Faktor bei der Verkehrsmittelwahl. *</label>
+            <div class="likert-scale">
+                <div class="likert-option">
+                    <input type="radio" name="price_sensitivity" value="1" id="price_1" required>
+                    <label for="price_1">
+                        <span class="likert-label">Stimme gar nicht zu</span>
+                        <span class="likert-number">1</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="price_sensitivity" value="2" id="price_2">
+                    <label for="price_2">
+                        <span class="likert-number">2</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="price_sensitivity" value="3" id="price_3">
+                    <label for="price_3">
+                        <span class="likert-label">Neutral</span>
+                        <span class="likert-number">3</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="price_sensitivity" value="4" id="price_4">
+                    <label for="price_4">
+                        <span class="likert-number">4</span>
+                    </label>
+                </div>
+                <div class="likert-option">
+                    <input type="radio" name="price_sensitivity" value="5" id="price_5">
+                    <label for="price_5">
+                        <span class="likert-label">Stimme voll zu</span>
+                        <span class="likert-number">5</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Umfrage abschließen ✓</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

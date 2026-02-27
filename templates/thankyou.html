@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Vielen Dank! - SP Umfrage{% endblock %}
+
+{% block content %}
+<div class="thankyou-section">
+    <div class="thankyou-card">
+        <div class="success-icon">✓</div>
+        <h2>Vielen Dank für Ihre Teilnahme!</h2>
+        
+        <p class="thankyou-text">
+            Ihre Antworten wurden erfolgreich gespeichert und werden für die 
+            Auswertung im Rahmen der Vorlesung "Verkehrsplanung" verwendet.
+        </p>
+        
+        <div class="info-box">
+            <h3>🎓 Ihre Daten helfen der Forschung</h3>
+            <p>
+                Mit Ihrer Teilnahme tragen Sie dazu bei, bessere Erkenntnisse über 
+                zukünftige Verkehrsentscheidungen zu gewinnen. Die Ergebnisse dieser 
+                Umfrage fließen in die Lehre und Forschung im Bereich Verkehrsplanung ein.
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📊 Was passiert nun?</h3>
+            <p>
+                Die gesammelten Daten werden mit Hilfe von Discrete Choice Modellen 
+                (z.B. Multinomial Logit) analysiert, um zu verstehen, welche Faktoren 
+                die Verkehrsmittelwahl beeinflussen.
+            </p>
+        </div>
+        
+        <div class="button-container">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                Zur Startseite
+            </a>
+        </div>
+        
+        <p class="small-text">
+            Bei Fragen zur Umfrage wenden Sie sich bitte an Ihre Dozentin/Ihren Dozenten.
+        </p>
+    </div>
+</div>
+{% endblock %}

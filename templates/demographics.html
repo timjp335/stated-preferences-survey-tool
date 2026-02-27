@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Soziodemografie - SP Umfrage{% endblock %}
+
+{% block content %}
+<div class="survey-section">
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 25%;"></div>
+    </div>
+    <p class="progress-text">Teil 1 von 4: Soziodemografie</p>
+    
+    <form method="POST" id="demographicsForm" class="survey-form">
+        <h2>Über Sie</h2>
+        <p class="section-description">
+            Zunächst möchten wir Sie etwas besser kennenlernen. Alle Angaben sind freiwillig und anonym.
+        </p>
+        
+        <div class="form-group">
+            <label for="age">Alter *</label>
+            <select id="age" name="age" required>
+                <option value="">Bitte wählen...</option>
+                <option value="18-24">18-24 Jahre</option>
+                <option value="25-34">25-34 Jahre</option>
+                <option value="35-44">35-44 Jahre</option>
+                <option value="45-54">45-54 Jahre</option>
+                <option value="55+">55+ Jahre</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">Geschlecht *</label>
+            <select id="gender" name="gender" required>
+                <option value="">Bitte wählen...</option>
+                <option value="männlich">männlich</option>
+                <option value="weiblich">weiblich</option>
+                <option value="divers">divers</option>
+                <option value="keine_angabe">keine Angabe</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Wohnort *</label>
+            <select id="location" name="location" required>
+                <option value="">Bitte wählen...</option>
+                <option value="städtisch">Städtisch (Großstadt)</option>
+                <option value="vorstädtisch">Vorstädtisch (Randgebiet einer Stadt)</option>
+                <option value="ländlich">Ländlich (Land, Dorf)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="license">Besitzen Sie einen Führerschein? *</label>
+            <select id="license" name="license" required>
+                <option value="">Bitte wählen...</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="car_availability">Verfügbarkeit eines Autos *</label>
+            <select id="car_availability" name="car_availability" required>
+                <option value="">Bitte wählen...</option>
+                <option value="immer">Immer verfügbar (eigenes Auto)</option>
+                <option value="manchmal">Manchmal verfügbar (z.B. Haushaltsmitglieder)</option>
+                <option value="nie">Nie verfügbar</option>
+            </select>
+        </div>
+        
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Weiter →</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

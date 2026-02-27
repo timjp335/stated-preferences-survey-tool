@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Willkommen - SP Umfrage{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <div class="welcome-card">
+        <h2>Willkommen zur Future Mode Choice Umfrage! 🚀</h2>
+        
+        <p class="intro-text">
+            Diese Umfrage ist Teil der Vorlesung "Verkehrsplanung" und untersucht, 
+            wie Menschen Entscheidungen über zukünftige Verkehrsmittel treffen würden.
+        </p>
+        
+        <div class="info-box">
+            <h3>📋 Was erwartet Sie?</h3>
+            <ul>
+                <li><strong>Teil 1:</strong> Soziodemografie (~2 Minuten)</li>
+                <li><strong>Teil 2:</strong> Ihr aktuelles Mobilitätsverhalten (~2 Minuten)</li>
+                <li><strong>Teil 3:</strong> 12 Wahlszenarien (~5 Minuten)</li>
+                <li><strong>Teil 4:</strong> Einstellungen zum Verkehr (~1 Minute)</li>
+            </ul>
+            <p><strong>Gesamtdauer:</strong> ca. 10 Minuten</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🔒 Datenschutz</h3>
+            <p>
+                Ihre Antworten werden anonym und vertraulich behandelt. 
+                Die Daten werden ausschließlich für Lehrzwecke verwendet.
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <h3>ℹ️ Hinweise</h3>
+            <p>
+                In Teil 3 werden Ihnen verschiedene Verkehrsmitteloptionen mit unterschiedlichen 
+                Eigenschaften (Reisezeit, Kosten, Zuverlässigkeit, CO₂-Ausstoß) präsentiert. 
+                Bitte wählen Sie jeweils die Option, die Sie bevorzugen würden.
+            </p>
+        </div>
+        
+        <div class="button-container">
+            <a href="{{ url_for('demographics') }}" class="btn btn-primary btn-large">
+                Umfrage starten →
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
