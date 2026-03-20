@@ -8,7 +8,7 @@ Dieses Tool ermöglicht es Studierenden und Forschenden, eigene SP-Umfragen zu e
 
 ## ✨ Features
 
-- 🌐 **Webbasiert**: Flask-Anwendung, die lokal oder auf einem Server laufen kann
+- 🌐 **Webbasiert**: Flask-Anwendung, lokal oder auf einem Server
 - 📊 **4-teilige Umfrage**: Soziodemografie, Mobilitätsverhalten, 12 Choice-Szenarien, Einstellungen
 - 🎨 **Modernes Design**: Responsive, visuell ansprechend, intuitive Bedienung
 - 📈 **D-optimales Design**: Wissenschaftlich fundiertes experimentelles Design
