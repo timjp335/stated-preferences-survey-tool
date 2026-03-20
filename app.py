@@ -214,4 +214,4 @@ if __name__ == '__main__':
     print("=" * 60)
     # Debug-Modus nur für Entwicklung - in Produktion auf False setzen
     debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() in ('true', '1', 'yes')
-    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
+    app.run(debug=debug_mode, host='0.0.0.0', port=5600)
