@@ -239,10 +239,12 @@ def admin_data_aggregated():
 
             scenario_id = row.get('scenario_id', '')
             choice_value = row.get('choice', '')
-            if scenario_id.isdigit():
+            try:
                 scenario_num = int(scenario_id)
-                if 1 <= scenario_num <= MAX_SCENARIOS:
-                    aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
+            except (TypeError, ValueError):
+                continue
+            if 1 <= scenario_num <= MAX_SCENARIOS:
+                aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
 
     csv_header = AGGREGATED_BASE_HEADER + AGGREGATED_CHOICE_HEADERS
     stream = StringIO()
