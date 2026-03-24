@@ -41,7 +41,8 @@ AGGREGATED_BASE_HEADER = [
     'env_awareness', 'tech_affinity', 'autonomous_openness', 'price_sensitivity'
 ]
 
-AGGREGATED_CHOICE_HEADERS = [f'choice_scenario_{i}' for i in range(1, 13)]
+MAX_SCENARIOS = 12
+AGGREGATED_CHOICE_HEADERS = [f'choice_scenario_{i}' for i in range(1, MAX_SCENARIOS + 1)]
 
 def init_csv():
     """Initialisiert die CSV-Datei mit Header, falls sie nicht existiert."""
@@ -96,7 +97,7 @@ def choice(scenario_num):
     if 'mobility' not in session:
         return redirect(url_for('mobility'))
     
-    if scenario_num < 1 or scenario_num > 12:
+    if scenario_num < 1 or scenario_num > MAX_SCENARIOS:
         return redirect(url_for('attitudes'))
     
     if request.method == 'POST':
@@ -108,7 +109,7 @@ def choice(scenario_num):
         session.modified = True
         
         # Nächstes Szenario oder weiter zu Einstellungen
-        if scenario_num < 12:
+        if scenario_num < MAX_SCENARIOS:
             return redirect(url_for('choice', scenario_num=scenario_num + 1))
         else:
             return redirect(url_for('attitudes'))
@@ -119,12 +120,12 @@ def choice(scenario_num):
     return render_template('choice.html', 
                           scenario=scenario, 
                           scenario_num=scenario_num,
-                          total_scenarios=12)
+                          total_scenarios=MAX_SCENARIOS)
 
 @app.route('/survey/attitudes', methods=['GET', 'POST'])
 def attitudes():
     """Teil 4: Einstellungsfragen."""
-    if 'choices' not in session or len(session.get('choices', {})) != 12:
+    if 'choices' not in session or len(session.get('choices', {})) != MAX_SCENARIOS:
         return redirect(url_for('choice', scenario_num=1))
     
     if request.method == 'POST':
@@ -165,7 +166,7 @@ def save_responses():
     with open(RESPONSES_FILE, 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         
-        for scenario_num in range(1, 13):
+        for scenario_num in range(1, MAX_SCENARIOS + 1):
             scenario = CHOICE_SETS[scenario_num - 1]
             choice_value = choices.get(str(scenario_num), '')
             
@@ -240,7 +241,7 @@ def admin_data_aggregated():
             choice_value = row.get('choice', '')
             if scenario_id.isdigit():
                 scenario_num = int(scenario_id)
-                if 1 <= scenario_num <= 12:
+                if 1 <= scenario_num <= MAX_SCENARIOS:
                     aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
 
     csv_header = AGGREGATED_BASE_HEADER + AGGREGATED_CHOICE_HEADERS
