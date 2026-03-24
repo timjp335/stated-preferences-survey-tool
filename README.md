@@ -180,10 +180,15 @@ Der Export wird durch Stoppen von localhost **nicht** automatisch geleert, da di
 
 Zum Zurücksetzen der gespeicherten Umfragedaten gibt es eine Admin-Route:
 ```
-http://127.0.0.1:5000/admin/clear-data
+POST http://127.0.0.1:5000/admin/clear-data
 ```
 
 Diese Route setzt die Datei auf den CSV-Header zurück (alle bisherigen Antworten werden gelöscht).
+
+Beispielaufruf:
+```bash
+curl -X POST http://127.0.0.1:5000/admin/clear-data
+```
 
 ## 📊 Datenanalyse
 
