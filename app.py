@@ -3,7 +3,7 @@ Stated Preferences Survey Tool - Flask Application
 Webbasiertes Tool für Future Mode Choice Experimente
 """
 
-from flask import Flask, render_template, request, session, redirect, url_for, send_file
+from flask import Flask, render_template, request, session, redirect, url_for, send_file, Response
 import json
 import os
 import csv
@@ -33,6 +33,14 @@ CSV_HEADER = [
     'alt_c_mode', 'alt_c_time', 'alt_c_cost', 'alt_c_reliability', 'alt_c_co2',
     'choice'
 ]
+
+AGGREGATED_BASE_HEADER = [
+    'respondent_id', 'timestamp', 'age', 'gender', 'location', 'license', 'car_availability',
+    'main_mode', 'commute_distance_km', 'pt_frequency', 'sharing_experience',
+    'env_awareness', 'tech_affinity', 'autonomous_openness', 'price_sensitivity'
+]
+
+AGGREGATED_CHOICE_HEADERS = [f'choice_scenario_{i}' for i in range(1, 13)]
 
 def init_csv():
     """Initialisiert die CSV-Datei mit Header, falls sie nicht existiert."""
@@ -203,6 +211,55 @@ def admin_data():
                         mimetype='text/csv')
     else:
         return "Noch keine Daten vorhanden.", 404
+
+@app.route('/admin/data-aggregated')
+def admin_data_aggregated():
+    """Admin-Export mit einer Zeile pro Befragtem."""
+    if not os.path.exists(RESPONSES_FILE):
+        return "Noch keine Daten vorhanden.", 404
+
+    aggregated_rows = {}
+
+    with open(RESPONSES_FILE, 'r', newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            respondent_id = row.get('respondent_id')
+            if not respondent_id:
+                continue
+
+            if respondent_id not in aggregated_rows:
+                aggregated_rows[respondent_id] = {
+                    key: row.get(key, '') for key in AGGREGATED_BASE_HEADER
+                }
+                for choice_key in AGGREGATED_CHOICE_HEADERS:
+                    aggregated_rows[respondent_id][choice_key] = ''
+
+            scenario_id = row.get('scenario_id', '')
+            choice_value = row.get('choice', '')
+            if scenario_id.isdigit():
+                scenario_num = int(scenario_id)
+                if 1 <= scenario_num <= 12:
+                    aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
+
+    csv_header = AGGREGATED_BASE_HEADER + AGGREGATED_CHOICE_HEADERS
+    from io import StringIO
+    stream = StringIO()
+    writer = csv.DictWriter(stream, fieldnames=csv_header)
+    writer.writeheader()
+    for respondent_id in sorted(aggregated_rows):
+        writer.writerow(aggregated_rows[respondent_id])
+
+    csv_content = stream.getvalue()
+    stream.close()
+
+    return Response(
+        csv_content,
+        mimetype='text/csv',
+        headers={
+            'Content-Disposition': 'attachment; filename=survey_responses_aggregated.csv'
+        }
+    )
 
 if __name__ == '__main__':
     init_csv()
