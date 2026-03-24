@@ -264,6 +264,15 @@ def admin_data_aggregated():
         }
     )
 
+@app.route('/admin/clear-data', methods=['POST'])
+def admin_clear_data():
+    """Setzt die Response-Daten zurück (nur CSV-Header bleibt bestehen)."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(RESPONSES_FILE, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(CSV_HEADER)
+    return "Daten wurden zurückgesetzt.", 200
+
 if __name__ == '__main__':
     init_csv()
     print("=" * 60)

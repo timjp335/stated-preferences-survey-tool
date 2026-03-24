@@ -174,6 +174,17 @@ http://127.0.0.1:5000/admin/data-aggregated
 
 Dies lädt die `survey_responses_aggregated.csv` Datei herunter.
 
+### Export zurücksetzen (clear)
+
+Der Export wird durch Stoppen von localhost **nicht** automatisch geleert, da die Daten in `data/responses.csv` gespeichert bleiben.
+
+Zum Zurücksetzen der gespeicherten Umfragedaten gibt es eine Admin-Route:
+```
+http://127.0.0.1:5000/admin/clear-data
+```
+
+Diese Route setzt die Datei auf den CSV-Header zurück (alle bisherigen Antworten werden gelöscht).
+
 ## 📊 Datenanalyse
 
 ### Jupyter Notebook starten
