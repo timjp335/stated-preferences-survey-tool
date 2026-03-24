@@ -9,6 +9,7 @@ import os
 import csv
 from datetime import datetime
 import uuid
+from io import StringIO
 
 app = Flask(__name__)
 # Verwende Umgebungsvariable oder generiere einen zufälligen Key für Lehrzwecke
@@ -243,11 +244,10 @@ def admin_data_aggregated():
                     aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
 
     csv_header = AGGREGATED_BASE_HEADER + AGGREGATED_CHOICE_HEADERS
-    from io import StringIO
     stream = StringIO()
     writer = csv.DictWriter(stream, fieldnames=csv_header)
     writer.writeheader()
-    for respondent_id in sorted(aggregated_rows):
+    for respondent_id in sorted(aggregated_rows.keys()):
         writer.writerow(aggregated_rows[respondent_id])
 
     csv_content = stream.getvalue()
