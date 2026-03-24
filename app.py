@@ -248,8 +248,8 @@ def admin_data_aggregated():
     stream = StringIO()
     writer = csv.DictWriter(stream, fieldnames=csv_header)
     writer.writeheader()
-    for respondent_id in sorted(aggregated_rows.keys()):
-        writer.writerow(aggregated_rows[respondent_id])
+    for aggregated_row in aggregated_rows.values():
+        writer.writerow(aggregated_row)
 
     csv_content = stream.getvalue()
     stream.close()
