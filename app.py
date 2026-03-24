@@ -3,12 +3,13 @@ Stated Preferences Survey Tool - Flask Application
 Webbasiertes Tool für Future Mode Choice Experimente
 """
 
-from flask import Flask, render_template, request, session, redirect, url_for, send_file
+from flask import Flask, render_template, request, session, redirect, url_for, send_file, Response
 import json
 import os
 import csv
 from datetime import datetime
 import uuid
+from io import StringIO
 
 app = Flask(__name__)
 # Verwende Umgebungsvariable oder generiere einen zufälligen Key für Lehrzwecke
@@ -33,6 +34,15 @@ CSV_HEADER = [
     'alt_c_mode', 'alt_c_time', 'alt_c_cost', 'alt_c_reliability', 'alt_c_co2',
     'choice'
 ]
+
+AGGREGATED_BASE_HEADER = [
+    'respondent_id', 'timestamp', 'age', 'gender', 'location', 'license', 'car_availability',
+    'main_mode', 'commute_distance_km', 'pt_frequency', 'sharing_experience',
+    'env_awareness', 'tech_affinity', 'autonomous_openness', 'price_sensitivity'
+]
+
+MAX_SCENARIOS = 12
+AGGREGATED_CHOICE_HEADERS = [f'choice_scenario_{i}' for i in range(1, MAX_SCENARIOS + 1)]
 
 def init_csv():
     """Initialisiert die CSV-Datei mit Header, falls sie nicht existiert."""
@@ -87,7 +97,7 @@ def choice(scenario_num):
     if 'mobility' not in session:
         return redirect(url_for('mobility'))
     
-    if scenario_num < 1 or scenario_num > 12:
+    if scenario_num < 1 or scenario_num > MAX_SCENARIOS:
         return redirect(url_for('attitudes'))
     
     if request.method == 'POST':
@@ -99,7 +109,7 @@ def choice(scenario_num):
         session.modified = True
         
         # Nächstes Szenario oder weiter zu Einstellungen
-        if scenario_num < 12:
+        if scenario_num < MAX_SCENARIOS:
             return redirect(url_for('choice', scenario_num=scenario_num + 1))
         else:
             return redirect(url_for('attitudes'))
@@ -110,12 +120,12 @@ def choice(scenario_num):
     return render_template('choice.html', 
                           scenario=scenario, 
                           scenario_num=scenario_num,
-                          total_scenarios=12)
+                          total_scenarios=MAX_SCENARIOS)
 
 @app.route('/survey/attitudes', methods=['GET', 'POST'])
 def attitudes():
     """Teil 4: Einstellungsfragen."""
-    if 'choices' not in session or len(session.get('choices', {})) != 12:
+    if 'choices' not in session or len(session.get('choices', {})) != MAX_SCENARIOS:
         return redirect(url_for('choice', scenario_num=1))
     
     if request.method == 'POST':
@@ -156,7 +166,7 @@ def save_responses():
     with open(RESPONSES_FILE, 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         
-        for scenario_num in range(1, 13):
+        for scenario_num in range(1, MAX_SCENARIOS + 1):
             scenario = CHOICE_SETS[scenario_num - 1]
             choice_value = choices.get(str(scenario_num), '')
             
@@ -203,6 +213,56 @@ def admin_data():
                         mimetype='text/csv')
     else:
         return "Noch keine Daten vorhanden.", 404
+
+@app.route('/admin/data-aggregated')
+def admin_data_aggregated():
+    """Admin-Export mit einer Zeile pro Befragtem."""
+    if not os.path.exists(RESPONSES_FILE):
+        return "Noch keine Daten vorhanden.", 404
+
+    aggregated_rows = {}
+
+    with open(RESPONSES_FILE, 'r', newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            respondent_id = row.get('respondent_id')
+            if not respondent_id:
+                continue
+
+            if respondent_id not in aggregated_rows:
+                aggregated_rows[respondent_id] = {
+                    key: row.get(key, '') for key in AGGREGATED_BASE_HEADER
+                }
+                for choice_key in AGGREGATED_CHOICE_HEADERS:
+                    aggregated_rows[respondent_id][choice_key] = ''
+
+            scenario_id = row.get('scenario_id', '')
+            choice_value = row.get('choice', '')
+            try:
+                scenario_num = int(scenario_id)
+            except (TypeError, ValueError):
+                continue
+            if 1 <= scenario_num <= MAX_SCENARIOS:
+                aggregated_rows[respondent_id][f'choice_scenario_{scenario_num}'] = choice_value
+
+    csv_header = AGGREGATED_BASE_HEADER + AGGREGATED_CHOICE_HEADERS
+    stream = StringIO()
+    writer = csv.DictWriter(stream, fieldnames=csv_header)
+    writer.writeheader()
+    for aggregated_row in aggregated_rows.values():
+        writer.writerow(aggregated_row)
+
+    csv_content = stream.getvalue()
+    stream.close()
+
+    return Response(
+        csv_content,
+        mimetype='text/csv',
+        headers={
+            'Content-Disposition': 'attachment; filename=survey_responses_aggregated.csv'
+        }
+    )
 
 if __name__ == '__main__':
     init_csv()

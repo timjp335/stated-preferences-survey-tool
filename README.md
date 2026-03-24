@@ -167,6 +167,13 @@ http://127.0.0.1:5000/admin/data
 
 Dies lädt die `responses.csv` Datei herunter.
 
+Zusätzlich gibt es einen gesammelten Export mit **einer Zeile pro Befragtem**:
+```
+http://127.0.0.1:5000/admin/data-aggregated
+```
+
+Dies lädt die `survey_responses_aggregated.csv` Datei herunter.
+
 ## 📊 Datenanalyse
 
 ### Jupyter Notebook starten
